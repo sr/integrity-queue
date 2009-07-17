@@ -34,9 +34,8 @@ class IntegrityQueueTest < Test::Unit::TestCase
     repo.add_successful_commit
     repo.add_failing_commit
 
-    buildable = Bob::Test::BuildableStub.for(repo, :head)
-    project   = Integrity::Project.gen(:uri => buildable.uri,
-      :branch => buildable.branch, :command => "./test")
+    project   = Integrity::Project.gen(:uri => repo.path,
+      :branch => "master", :command => "./test")
 
     payload   = { "scm"     => "git",
                   "uri"     => repo.path,
